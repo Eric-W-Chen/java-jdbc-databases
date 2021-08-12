@@ -39,15 +39,11 @@ public class GetOrderDao {
              ResultSet rs = createResultSet(ps)
         ) {
             OrderDto order_dto = orderDto;
-            while (rs.next()) {
-                long orderID = rs.getLong("order_id");
-                order_dto.setOrderId(orderID);
-                long customerID = rs.getLong("customer_id");
-                order_dto.setCustomerId(customerID);
-                Date orderDate = rs.getDate("order_date");
-                order_dto.setDate(orderDate);
-                String status = rs.getString("order_status");
-                order_dto.setStatus(status);
+            if (rs.next()) {
+                orderDto.setOrderId(rs.getLong("order_id"));
+                orderDto.setCustomerId(rs.getLong("order_customer_id"));
+                orderDto.setDate(rs.getTimestamp("order_date"));
+                orderDto.setStatus(rs.getString("order_status"));
             }
         } catch (SQLException ex) {
             ExceptionHandler.handleException(ex);
