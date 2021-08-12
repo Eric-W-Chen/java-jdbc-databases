@@ -34,7 +34,7 @@ public class UpdateOrderDao {
         try (Connection con = database.getConnection();
              PreparedStatement ps = createPreparedStatement(con, paramsDto)
         ) {
-            numberResults = ps.getUpdateCount();
+            numberResults = ps.executeUpdate();
         } catch (SQLException ex) {
             ExceptionHandler.handleException(ex);
         }
@@ -51,7 +51,8 @@ public class UpdateOrderDao {
      */
     private PreparedStatement createPreparedStatement(Connection con, ParamsDto paramsDto) throws SQLException {
         PreparedStatement prepared_statement = con.prepareStatement(query); 
-        // prepared_statement.set(paramsDto.getStatus(), paramsDto.getOrderId());
+        prepared_statement.setString(1, paramsDto.getStatus());
+        prepared_statement.setLong(2, paramsDto.getOrderId());
         return prepared_statement;
     }
 }
