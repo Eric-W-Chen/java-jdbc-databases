@@ -5,9 +5,6 @@ import com.pluralsight.order.dto.ParamsDto;
 import com.pluralsight.order.util.Database;
 import com.pluralsight.order.util.ExceptionHandler;
 
-import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.commons.lang3.time.DateUtils;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -52,8 +49,6 @@ public class GetOrderDao {
                 String status = rs.getString("order_status");
                 order_dto.setStatus(status);
             }
-            
-
         } catch (SQLException ex) {
             ExceptionHandler.handleException(ex);
         }
