@@ -66,8 +66,10 @@ public class DeleteOrderDao {
         String sql = buildDeleteSql(orderIds);
         PreparedStatement ps = con.prepareStatement(sql);
 
-        for (int i = 0; i < orderIds.size(); i++) {
-            ps.setLong(i, orderIds.get(i));
+        int i = 1;
+        for (Long id : orderIds) {
+            ps.setLong(i, id);
+            i += 1;
         }
         return ps;
     }
